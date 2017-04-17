@@ -1,4 +1,4 @@
-import shapeless.{ :+:, CNil, Inl, Inr }
+import shapeless.{ :+:, CNil, Generic, Inl, Inr }
 
 /*
 Now we know how shapeless encodes product types. What about coproducts?
@@ -28,3 +28,16 @@ purely from instances of Inr. We always have exactly one Inl in a value.
  */
 
 // TODO: wow
+sealed trait Shape
+
+final case class Rectangle(width: Double, height: Double) extends Shape
+
+final case class Circle(radius: Double) extends Shape
+
+val gen = Generic[Shape]
+// The Repr of the Generic for Shape is a Coproduct of the subtypes of the sealed trait
+// Repr: Rectangle :+: Circle :+: CNil
+gen.to(Rectangle(3.0, 4.0))
+//  gen.Repr = Inl(Rectangle(3.0,4.0))
+gen.to(Circle(1.0))
+//  gen.Repr = Inr(Inl(Circle(1.0)))
