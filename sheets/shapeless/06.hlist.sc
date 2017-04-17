@@ -51,6 +51,7 @@ demo.tail
 val i :: s :: u :: HNil = demo
 
 import shapeless.syntax.std.tuple._
+// Most of the HList methods become available on tuples by simply importing import shapeless.syntax.std.tuple._
 (1, "foo", 12.3).tail
 (1, "foo", 12.3).head
 (1, "foo", 12.3) ++ ("my", 2F)
