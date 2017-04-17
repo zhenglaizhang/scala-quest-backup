@@ -41,3 +41,7 @@ gen.to(Rectangle(3.0, 4.0))
 //  gen.Repr = Inl(Rectangle(3.0,4.0))
 gen.to(Circle(1.0))
 //  gen.Repr = Inr(Inl(Circle(1.0)))
+
+
+// summary:
+// the Generic type class allowed us to convert any instance of an ADT to a generic encoding made of HLists and Coproducts
