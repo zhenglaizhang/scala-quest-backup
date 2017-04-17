@@ -2,6 +2,14 @@ val catsVersion = "0.9.0"
 val shapelessVersion = "2.3.2"
 val catsAll = "org.typelevel" %% "cats" % catsVersion
 val shapelessAll = "com.chuusai" %% "shapeless" % shapelessVersion
+val refinedVersion = "0.8.0"
+val refined = List(
+  "eu.timepit" %% "refined" % refinedVersion,
+  "eu.timepit" %% "refined-pureconfig" % refinedVersion,  // optional, JVM-only
+  "eu.timepit" %% "refined-scalacheck" % refinedVersion, // optional
+  "eu.timepit" %% "refined-scalaz" % refinedVersion, // optional
+  "eu.timepit" %% "refined-scodec" % refinedVersion // optional
+)
 
 //val macroParadise = compilerPlugin("org.scalamacros" % "paradise" % "2.1.0" cross CrossVersion.full)
 //val kindProjector = compilerPlugin("org.spire-math" %% "kind-projector" % "0.6.3")
@@ -22,7 +30,7 @@ lazy val root = (project in file(".")).
     libraryDependencies ++= Seq(
       catsAll,
       shapelessAll
-    ),
+    ) ++ refined,
     scalacOptions ++= Seq(
       "-deprecation",
       "-encoding", "UTF-8",
