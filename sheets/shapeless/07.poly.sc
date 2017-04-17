@@ -1,4 +1,5 @@
-import shapeless.Poly1
+import shapeless._
+
 /*
 A polymorphic function is a function that is defined for various – possibly unrelated – input types. Its output type varies according to
 the parameters types.
@@ -24,8 +25,9 @@ MakeBigger("foo")
 
 /*
 scala> :type MakeBigger.intCase
-PolyExamples.MakeBigger.Case[Int]{type Result = Int}
+MakeBigger.Case[Int]{type Result = Int}
 
 scala> :type MakeBigger.stringCase
-PolyExamples.MakeBigger.Case[String]{type Result = String}
+MakeBigger.Case[String]{type Result = String}
  */
+MakeBigger.intCase.isInstanceOf[shapeless.poly.Case[MakeBigger.type, Int::HNil]]

@@ -1,4 +1,11 @@
-import shapeless.{ HList, HNil, :: }
+import shapeless.{ ::, HList, HNil }
+
+
+/*
+A HList is a List where the type of every element is statically known at compile time. You may see them as "tuples on steroid". The
+beauty of HList compared to tuples is that you'll find all the essential List methods like take, head, tail, map, flatMap, zip, etc. plus
+ a bunch of methods specific to HList
+ */
 
 val hlist = "foo" :: 42 :: java.util.UUID.randomUUID() :: HNil
 // hlist: shapeless.::[String,shapeless.::[Int,shapeless.::[java.util.UUID,shapeless.HNil]]] = foo :: 42 ::
@@ -27,4 +34,19 @@ def thirdIsTrue(hlist: HList) = hlist match {
 
 thirdIsTrue(hl1)
 thirdIsTrue(hl2)
+
+
+case class User(
+  name: String
+)
+
+val demo: ::[Int, ::[String, ::[User, HNil]]] = 32 :: "Hello" :: User("John") :: HNil
+
+val firstStr = demo.select[String]
+//demo.select[List[Int]]
+demo.head
+demo.tail
+
+// pattern matching
+val i :: s :: u :: HNil = demo
 

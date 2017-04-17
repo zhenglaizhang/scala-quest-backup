@@ -1,3 +1,11 @@
+// Shapeless is a type class and dependent type based generic programming library for Scala.
+
+/*
+To me, Shapeless is a toolkit to leverage Scala's type system at your own profit. You may use it to have more "precise" types, like statically sized list (lists which size is known at compile time), you may also use HList as a better tuple.
+
+More generally, Shapeless can be used to make the compiler work for you, scrape some boilerplate, and gain a little extra typesafety.
+
+ */
 
 case class Employee(
   name: String,
@@ -21,6 +29,8 @@ def iceCreamCsv(c: IceCream) = List(c.name, c.numCherries.toString, c.inCone.toS
 // Generic programming is about overcoming differences like these. Shapeless
 //makes it convenient to convert specific types into generic ones that we can
 //manipulate with common code.
+
+import scala.collection.generic
 
 import shapeless._
 
