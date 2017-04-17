@@ -55,3 +55,34 @@ import shapeless.syntax.std.tuple._
 (1, "foo", 12.3).tail
 (1, "foo", 12.3).head
 (1, "foo", 12.3) ++ ("my", 2F)
+
+/*
+based on Hlist and Generic, Shapeless provides a way to create functions of arbitrary arity
+ */
+
+class MyClass[H <: HList](hs: H)
+
+/*
+you may not want to force HList on your users. So how do you create instances of MyClass without using HList directly ? Well, you can
+provide a bunch of apply methods
+ */
+object MyClass2 {
+  def apply[A](a: A) = new MyClass(a :: HNil)
+
+  def apply[A, B](a: A, b: B) = new MyClass(a :: b :: HNil)
+
+  def apply[A, B, C](a: A, b: B, c: C) = new MyClass(a :: b :: c :: HNil)
+}
+
+object MyClass {
+
+  import shapeless.Generic
+
+  def apply[P <: Product, L <: HList](p: P)(implicit gen: Generic.Aux[P, L]) = new MyClass[L](gen.to(p))
+}
+
+MyClass(1, "hello")
+MyClass(1, "hello", 12.6)
+/*
+Note that you're actually passing a tuple to the apply method. Under stricter compiler options, you'll need an extra pair of parenthesis: MyClass((1, "Hello", 12.6))
+ */
