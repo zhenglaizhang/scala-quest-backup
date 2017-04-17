@@ -1,0 +1,40 @@
+todo    https://lihaoyi.github.io/post/StrategicScalaStyleConcisenessNames.html
+todo http://twitter.github.io/effectivescala/#Formatting-Naming
+
+Length
+Small scope → shorter
+  You can use shorter identifier if it only appears in a small scope (at most several lines)
+(tick) someCollection.map(i => i * 3 + 5)
+Dangerous→ long (never operator/apply)
+Identifiers that are potentially dangerous (e. g. delete something) should be long (even artificially long) and uncomfortable to write
+(tick) db.dropAllTablesWithoutAnotherWarning()
+(tick) db.dropAllTablesWithoutAnotherWarning(iKnowWhatIAmDoing = true)
+(tick) db.unsafeDropAllTables()
+(error) db.drop()
+Strongly-typed → can be short or operator
+If type of identifier (mostly function) is very strong and provides a lot of information, name can be shorter and more abstract
+(tick) def fmap[A, B, F[_]](fa: F[A])(f: A => B): F[B] = ???
+(error) def doIt(input: String): Unit = ???
+Used often→ should be short
+  If identifier is used often, make it shorter
+(tick) def initializeDatabase(): Unit = ???
+(error) def init(): Unit = ???                  // used only once
+Used very often → can be operator or apply
+If identifier is used extremely often, several times on a line and across many lines, name can be very short, apply or operator
+(tick) findUser >>= findEmployer >>= findAddress   // >>= is composition of Kleisli functions
+  (tick) actor ! msg
+(tick) val list = List(1, 2, 3)                    // constructing lists is very common, can be apply
+(error) def ->-(id: String) = db.connect(id)        // not used frequently enough
+Abbreviations→ only commonly known
+Avoid creating own abbreviations, watch for ambiguity (char, fact etc.)
+Other Rules
+  Create names for reading (either by yourself or others)
+Show reader something he does not know yet. Hide what they know
+  (tick) object Json { def create: Json = ??? }
+(error) object Json { def createJson: Json = ??? }
+Getters have no get in name
+  (tick) obj.count
+(error) obj.getCount
+If method returns value, use descriptive name
+(tick) obj.isBlocked
+(error) obj.blocked
