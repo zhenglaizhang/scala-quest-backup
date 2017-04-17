@@ -5,6 +5,7 @@ To me, Shapeless is a toolkit to leverage Scala's type system at your own profit
 
 More generally, Shapeless can be used to make the compiler work for you, scrape some boilerplate, and gain a little extra typesafety.
 
+Generic is a simple way to convert case class and product types (like tuples) to HList, and vice-versa:
  */
 
 case class Employee(

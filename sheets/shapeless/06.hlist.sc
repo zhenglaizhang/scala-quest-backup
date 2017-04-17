@@ -50,3 +50,7 @@ demo.tail
 // pattern matching
 val i :: s :: u :: HNil = demo
 
+import shapeless.syntax.std.tuple._
+(1, "foo", 12.3).tail
+(1, "foo", 12.3).head
+(1, "foo", 12.3) ++ ("my", 2F)
