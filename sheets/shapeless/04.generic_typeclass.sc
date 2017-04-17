@@ -1,4 +1,4 @@
-import shapeless.the
+import shapeless.{ HNil, the }
 /*
 We encode type class in Scala using traits and implicits. A type class is a parameterised trait represenঞng some sort of general
 funcঞonality that we would like to apply to a wide range of types:
@@ -123,5 +123,17 @@ the[CsvEncoder[IceCream]]
 //  override def encode(value: Boolean) = if (b) List("yes") else List("no")
 //}
 
+
+def createEncoder[A](func: A => List[String]): CsvEncoder[A] = new CsvEncoder[A] {
+  override def encode(value: A) = func(value)
+}
+
+implicit val stringEncoder: CsvEncoder[String] = createEncoder(str => List(str))
+
+implicit val intEncoder: CsvEncoder[Int] = createEncoder(num => List(num.toString))
+
 implicit val booleanEncoder: CsvEncoder[Boolean] = CsvEncoder.instance(b => if (b) List("yes") else List("no"))
 
+import shapeless._
+implicit val hnilEncoder: CsvEncoder[HNil] = createEncoder(hnil => HNil)
+// TODO: wow
