@@ -1,4 +1,5 @@
 import shapeless._
+import net.zhenglai.lib._
 
 case class Greeting(
   message: String
@@ -12,4 +13,10 @@ object MainApp extends App {
   val greeting: Greeting = generic.from(hlist)
 
   println(greeting.message)
+
+
+  Right(12)
+    .mapR(_ + 12)
+    .foreachR(println)
+
 }

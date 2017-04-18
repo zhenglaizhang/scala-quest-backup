@@ -48,4 +48,4 @@ def divide1(dividend: Double, divisor: Double): DivisionError
 
 
 import net.zhenglai.lib._
-divide(12, 1).map(_ + 100)
+divide(12, 1).mapR(_ + 100)
