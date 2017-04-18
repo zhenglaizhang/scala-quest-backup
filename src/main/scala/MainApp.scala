@@ -15,8 +15,13 @@ object MainApp extends App {
   println(greeting.message)
 
 
-  Right(12)
+  (Right(12): Either[String, Int])
     .mapR(_ + 12)
+    .mapL(e => println(e))
     .foreachR(println)
 
+  (Left("error"): Either[String, Int])
+    .mapR(_ + 12)
+    .mapL(e => println(e))
+    .foreachR(println)
 }
