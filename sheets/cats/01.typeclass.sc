@@ -1,6 +1,4 @@
 import cats._
-import cats.data._
-import cats.implicits._
 
 
 object Holder {
@@ -35,6 +33,16 @@ Interface - Problems:
 
 
 // Type Class
+
+
+trait GenTraversableOnce[A] {
+  def sum(implicit num: Numeric[A]): A
+
+  def min(implicit ord: Ordering[A]): A
+
+  def maxBy[B](f: A => B)(implicit cmp: Ordering[B]): A
+}
+
 
 trait Closeable[T] {
   def close(t: T): Unit
