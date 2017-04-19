@@ -58,3 +58,8 @@ val f2 = {(_: Int) + 1}
 val x = List(1, 2, 3)
 assert((x map (f1 map f2)) == (x map f1 map f2))
 
+
+// checking laws
+//import cats.laws.discipline.FunctorTests
+//val rs = FunctorTests[Either[Int, ?]].functor[Int, Int, Int]
+//rs.all.check
