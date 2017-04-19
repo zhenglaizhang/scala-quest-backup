@@ -8,10 +8,10 @@ def divide(dividend: Double, divisor: Double): Either[String, Double] = {
   // handle the possible failed state of the computation
     Left("Can't divide by 0")
   else
-    Right(dividend / divisor) }
+    Right(dividend / divisor)
+}
 
 // TODO: more about Either!!
-
 
 
 divide(12, 0) match {
@@ -40,12 +40,28 @@ case object DivisionByZero extends DivisionError
 
 case object SomeOtherPossibleError extends DivisionError
 
-def divide1(dividend: Double, divisor: Double): DivisionError
-
-
-
-
+//def divide1(dividend: Double, divisor: Double): DivisionError
 
 
 import net.zhenglai.lib._
+
 divide(12, 1).mapR(_ + 100)
+divide(12, 1).right.map(_ + 200)
+divide(12, 0).left.map(_ + " 200")
+
+for {
+  r1 <- divide(12, 1).right
+  r2 <- divide(12, 1).right
+  r3 <- Right(r1 + r2).right
+} yield (r1 + r2 + r3)
+
+divide(12, 1).fold(l => {
+  println(l)
+}, r => {
+  println(r)
+})
+
+divide(12, 0).fold(
+  _ => 0, // default value
+  r => r
+)
