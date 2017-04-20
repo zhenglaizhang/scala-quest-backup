@@ -1,4 +1,6 @@
 
+scalaVersion := "2.12.2"
+
 val catsVersion = "0.9.0"
 val shapelessVersion = "2.3.2"
 val scalazVersion = "7.2.10"
