@@ -39,7 +39,7 @@ implicit val intMonoid = IntMonoid
 // implicit parameter is often written as context bound:
 def sum[A: Monoid](xs: List[A]) = {
   val m = implicitly[Monoid[A]]
-  xs.foldRight(m.mzero)(m.mappend)
+  xs.foldLeft(m.mzero)(m.mappend)
 }
 
 sum(List(1, 2, 3))
