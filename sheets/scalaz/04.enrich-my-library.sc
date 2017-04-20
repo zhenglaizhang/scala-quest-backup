@@ -65,3 +65,16 @@ class BlingString(string: String) {
 
 implicit def toBlingString(string: String) = new BlingString(string)
 "abc".bling
+
+class StringOp(s: String) {
+
+  import scala.util.control.Exception.allCatch
+
+  def toIntOpt: Option[Int] = allCatch opt {s.toInt}
+}
+
+implicit def toStringOp(s: String) = new StringOp(s)
+
+"abc".toIntOpt
+"123".toIntOpt
+"123.4".toIntOpt
