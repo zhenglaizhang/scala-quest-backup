@@ -1,5 +1,7 @@
+
 val catsVersion = "0.9.0"
 val shapelessVersion = "2.3.2"
+val scalazVersion = "7.2.10"
 val catsAll = "org.typelevel" %% "cats" % catsVersion
 val shapelessAll = "com.chuusai" %% "shapeless" % shapelessVersion
 val refinedVersion = "0.8.0"
@@ -29,7 +31,8 @@ lazy val root = (project in file(".")).
     scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
       catsAll,
-      shapelessAll
+      shapelessAll,
+      "org.scalaz" %% "scalaz-core" % scalazVersion
     ) ++ refined,
     scalacOptions ++= Seq(
       "-deprecation",
