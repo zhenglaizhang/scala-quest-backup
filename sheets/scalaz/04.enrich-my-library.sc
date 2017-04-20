@@ -47,8 +47,21 @@ Using the same technique, Scalaz also provides method injections for standard li
  */
 
 import scalaz.Scalaz._
+
 1.some | 2
 Some(1).getOrElse(2)
 
-(1 > 10)? 1 | 2
+(1 > 10) ? 1 | 2
 if (1 > 10) 1 else 2
+
+
+/*
+"Pimp My Library" pattern allows you to decorate classes with additional methods and properties.
+ */
+
+class BlingString(string: String) {
+  def bling = "*" + string + "*"
+}
+
+implicit def toBlingString(string: String) = new BlingString(string)
+"abc".bling
