@@ -1,4 +1,8 @@
 /*
+A typeclass is a sort of interface that defines some behavior. If a type is a part of a typeclass, that means that it supports and implements the behavior the typeclass describes.
+
+Type class provides purely functional data structures to complement those from the Scala standard library. It defines a set of foundational type classes (e.g. Functor, Monad) and corresponding instances for a large number of data structures.
+
 Type classes define a set of contracts that the adaptee type needs to implement. Many people misinterpret type classes synonymously with
 interfaces in Java or other programming languages. With interfaces the focus is on subtype polymorphism, with type classes the focus
 changes to parametric polymorphism. You implement the contracts that the type class publishes across unrelated types.
