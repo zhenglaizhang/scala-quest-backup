@@ -14,8 +14,6 @@ To inject methods and operators. (static monkey patching)
 To declare type constraints.
 To retrieve type information from compiler.
 
-
-
 Implicits are selected in the following precedence:
 
 Values and converters accessible without prefix via local declaration, imports, outer scope, inheritance, and current package object. Inner scope can shadow values when they are named the same.
