@@ -39,6 +39,7 @@ implicit def toMonoidOp[A: Monoid](a: A): MonoidOp[A] = new MonoidOp[A] {
 "a" |+| "4"
 
 /*
+
 We were able to inject |+| to both Int and String with just one definition.
  */
 
@@ -46,6 +47,7 @@ We were able to inject |+| to both Int and String with just one definition.
 Using the same technique, Scalaz also provides method injections for standard library types like Option and Boolean:
  */
 
+import scala.language.implicitConversions
 import scalaz.Scalaz._
 
 1.some | 2
@@ -60,10 +62,10 @@ if (1 > 10) 1 else 2
  */
 
 class BlingString(string: String) {
-  def bling = "*" + string + "*"
+  def bling: String = "*" + string + "*"
 }
 
-implicit def toBlingString(string: String) = new BlingString(string)
+implicit def toBlingString(string: String): BlingString = new BlingString(string)
 "abc".bling
 
 class StringOp(s: String) {
@@ -73,7 +75,7 @@ class StringOp(s: String) {
   def toIntOpt: Option[Int] = allCatch opt {s.toInt}
 }
 
-implicit def toStringOp(s: String) = new StringOp(s)
+implicit def toStringOp(s: String): StringOp = new StringOp(s)
 
 "abc".toIntOpt
 "123".toIntOpt
