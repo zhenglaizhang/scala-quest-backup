@@ -34,3 +34,5 @@ res.onFailure
 ...
 Keep yield short, real value, do not perform side effects.
 */
+println("abc")
+"abc"

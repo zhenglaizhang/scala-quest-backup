@@ -21,6 +21,9 @@ object Monoid {
 def plus[A: Monoid](a: A, b: A): A = implicitly[Monoid[A]].append(a, b)
 
 
+/*
+We would like to provide an operator. But we don’t want to enrich just one type, but enrich all types that has an instance for Monoid. Let me do this in Scalaz 7 style
+ */
 trait MonoidOp[A] {
 
   val F: Monoid[A]

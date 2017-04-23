@@ -1,7 +1,5 @@
 package net.zhenglai
 
-import scalaz.Alpha.C
-
 package object lib {
 
   implicit class EitherOps[A, B](val either: Either[A, B]) extends AnyVal {

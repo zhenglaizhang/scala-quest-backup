@@ -18,6 +18,8 @@ val refined = List(
   "eu.timepit" %% "refined-scodec" % refinedVersion // optional
 )
 
+initialCommands in console := "import scalaz._, Scalaz._"
+
 resolvers ++= Seq(
   Resolver.sonatypeRepo("releases"),
   Resolver.sonatypeRepo("snapshots")
