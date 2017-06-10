@@ -18,6 +18,10 @@ val refined = List(
   "eu.timepit" %% "refined-scodec" % refinedVersion // optional
 )
 
+val common = List(
+  "org.scaldi" %% "scaldi" % "0.5.8"
+)
+
 initialCommands in console := "import scalaz._, Scalaz._"
 
 resolvers ++= Seq(
@@ -34,7 +38,7 @@ lazy val root = (project in file(".")).
       catsAll,
       shapelessAll,
       "org.scalaz" %% "scalaz-core" % scalazVersion
-    ) ++ refined,
+    ) ++ refined ++ common,
     scalacOptions ++= Seq(
       "-deprecation",
       "-encoding", "UTF-8",
