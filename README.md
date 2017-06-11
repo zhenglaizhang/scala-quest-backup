@@ -1,5 +1,7 @@
 # Scala Quest
 
+* CODE as DOCUMENTATION, BUT NOT ALWAYS
+* CLEAN & CONSISTENT
 * DO MORE WITH COMPILER
 * DO MORE AUTOMATION
 * MAKE DEPENDENCY EXPLICIT THROUGH FUNCTIONAL CONSTRUCTS
@@ -11,12 +13,15 @@
   * COMMUTATIVE
   * IDEMPOTENT
   * DISTRIBUTED
+* SERIALIZABLE (for Spark)
+
+
+## Scala.js
 
 ## Design
 
 * mutation vs fact(event sourcing)
-
-
+* The object graph should be created as late as possible.
 
 ## Common libs
 

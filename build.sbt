@@ -12,7 +12,7 @@ val shapelessAll = "com.chuusai" %% "shapeless" % shapelessVersion
 val refinedVersion = "0.8.0"
 val refined = List(
   "eu.timepit" %% "refined" % refinedVersion,
-  "eu.timepit" %% "refined-pureconfig" % refinedVersion,  // optional, JVM-only
+  "eu.timepit" %% "refined-pureconfig" % refinedVersion, // optional, JVM-only
   "eu.timepit" %% "refined-scalacheck" % refinedVersion, // optional
   "eu.timepit" %% "refined-scalaz" % refinedVersion, // optional
   "eu.timepit" %% "refined-scodec" % refinedVersion // optional
@@ -20,6 +20,10 @@ val refined = List(
 
 val common = List(
   "org.scaldi" %% "scaldi" % "0.5.8"
+  , "com.softwaremill.macwire" %% "macros" % "2.3.0" % "provided"
+  , "com.softwaremill.macwire" %% "macrosakka" % "2.3.0" % "provided"
+  , "com.softwaremill.macwire" %% "util" % "2.3.0"
+  , "com.softwaremill.macwire" %% "proxy" % "2.3.0"
 )
 
 initialCommands in console := "import scalaz._, Scalaz._"

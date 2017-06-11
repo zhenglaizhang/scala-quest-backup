@@ -44,6 +44,7 @@ Option(1) |+| None
 val f = List(1, 2, 3)
 f.foldMap(identity)
 f.foldMap(_.toString)
+List().foldMap(_.toString)
 
 
 

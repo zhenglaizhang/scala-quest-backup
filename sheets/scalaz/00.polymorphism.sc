@@ -1,7 +1,7 @@
 // todo http://eed3si9n.com/learning-scalaz/polymorphism.html
 // todo http://debasishg.blogspot.tw/2010/06/scala-implicits-type-classes-here-i.html
 
-def head[A](xs: Seq[A]): A = xs(0)
+def head[A](xs: Seq[A]): A = xs.head
 
 head(List(1, 2))
 head(1 :: 2 :: Nil)
