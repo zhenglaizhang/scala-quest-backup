@@ -88,7 +88,13 @@ trait NamedSet[T] extends Set[T] with PartialFunction[T, Boolean] {
 val handleOdd: PartialFunction[Int, Int] = {case i: Int if i % 2 == 0 => println("odd"); i * 2}
 val handleEven: PartialFunction[Int, Int] = {case i: Int if i % 2 == 1 => println("even"); i * 3}
 
-val handleAll = handleOdd orElse  handleEven
+val handleAll = handleOdd orElse handleEven
 
 handleAll(12)
 handleAll(13)
+
+// partial function <-> total function
+val a: Int => Option[Int] = Some(_)
+a(12)
+val g = Function.unlift(a)
+g(12)
