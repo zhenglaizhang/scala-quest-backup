@@ -12,7 +12,8 @@ The difference in behavior between collect and map, which is that collect expect
 
 If you define the partial function inline, the compiler knows that it’s a partial function and you avoid the explicit PartialFunction trait.
 
-In mathematics, a partial function X => Y is a function X' → Y, where X' is a subset of X. It would be incorrect to name Set a PartialFunction, because it is a total function - it is defined on every element.
+In mathematics, a partial function X => Y is a function X' → Y, where X' is a subset of X. It would be incorrect to name Set a
+PartialFunction, because it is a total function - it is defined on every element.
  */
 
 List(1 -> "one", 2 -> "two")
@@ -82,3 +83,12 @@ trait NamedSet[T] extends Set[T] with PartialFunction[T, Boolean] {
   override def isDefinedAt(x: T) = true
 }
 
+
+// A terrific feature of partial functions is that you can chain them together.
+val handleOdd: PartialFunction[Int, Int] = {case i: Int if i % 2 == 0 => println("odd"); i * 2}
+val handleEven: PartialFunction[Int, Int] = {case i: Int if i % 2 == 1 => println("even"); i * 3}
+
+val handleAll = handleOdd orElse  handleEven
+
+handleAll(12)
+handleAll(13)
