@@ -3,6 +3,8 @@ a block with a bunch of case inside is one way of defining an anonymous function
 
 case blocks define special functions called partial functions
 
+partial function == partially defined function
+
 
 A partial function on the other hand is defined only for a subset of the possible values of its arguments:
 
