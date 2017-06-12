@@ -3,10 +3,17 @@ Implicits are a very important feature in Scala, they are used basically in 2 ma
   1) implicit parameters
   2) implicit conversions
 
+An implicit variable in Scala is one marked with the implicit modifier,
+
+an implicit parameter is a parameter marked with that keyword
+technically, it's a parameter list that's marked with the modifier
+
 implicit parameters are heavily used to do TLP in Scala
   it is mostly used when we need some kind of context (ExecutionContext)
 
 There is compile time overhead but also runtime, because we’ll have to instantiate a Printer instance per cycle.
+
+Since we're indexing by type only, Scala has no idea what to do if multiple implicit variables of the same type are in scope.
 */
 
 implicit val value = 4
@@ -78,3 +85,32 @@ Implicit resolution doesn’t stop at the first level, we can have implicits tha
 and this can go on until the compiler finds a stable implicit value,
 this is a very good way to kill the compiler!
  */
+
+
+
+/*
+  Implicit conversions.
+
+If you define a one argument method with the implicit modifier, Scala uses that as a way to convert arguments of the input type to the output type in calls when this method is in scope.
+
+This also applies for one argument classes.
+
+
+implicit conversions have some obvious uses - generally for method injection
+
+ I'd say it's generally not a great idea to use implicit parameters. They're simply not ... explicit enough, and can lead to hard-to-debug magical behaviour. That they're indexed only by type is a further source of error, and the complex precedence rules for resolving implicit ambiguities is a third. Except Type Classes...
+ */
+
+implicit def agentCodename(i: Int): String = s"00$i"
+def hello(name: String) = s"Hello, $name"
+hello(7)
+// "hello 007!
+
+implicit class Agent(code: Int) {
+  def codeName = s"00$code"
+}
+
+def hello2(agent: Agent) = s"hello, ${agent.codeName}"
+hello(7)
+
+// http://www.cakesolutions.net/teamblogs/demystifying-implicits-and-typeclasses-in-scala
