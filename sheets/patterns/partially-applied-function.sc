@@ -57,3 +57,50 @@ val min203: Email => Boolean = sizeConstraint2Fn(ge)(20)
 val sum: (Int, Int) => Int = _ + _
 val sumCurried: Int => Int => Int = sum.curried
 val sum2: (Int, Int) => Int = Function.uncurried(sumCurried)
+
+
+/*
+  Currying and partial function application are one of several ways of injecting dependencies in functional programming.
+  */
+
+
+case class User(name: String)
+
+trait EmailRepository {
+  def getMails(user: User, unread: Boolean): Seq[Email]
+}
+
+trait FilterRepository {
+  def getEmailFilter(user: User): EmailFilter
+}
+
+trait MailboxService {
+  /*
+   These two repositories dependencies are declared as parameters to the getNewMails method, each in their own parameter list.
+   */
+  def getNewMails(emailRepository: EmailRepository)
+    (filterRepository: FilterRepository)
+    (user: User): Seq[Email] = {
+    emailRepository
+      .getMails(user, true)
+      .filter(filterRepository.getEmailFilter(user))
+  }
+
+  val newEmails: User => Seq[Email]
+}
+
+object MockEmailRepository extends EmailRepository {
+  override def getMails(user: User, unread: Boolean) = Nil
+}
+
+object MockFilterRepository extends FilterRepository {
+  override def getEmailFilter(user: User) = _ => true
+}
+
+object MailboxServiceWithMockDeps extends MailboxService {
+  override val newEmails: User => Seq[Email] = getNewMails(MockEmailRepository)(MockFilterRepository) _
+}
+
+// We can now call MailboxServiceWithMoxDeps.newMails(User("daniel"))
+// without having to specify the two repositories to be used. I
+MailboxServiceWithMockDeps.newEmails(User("hello"))
