@@ -2,7 +2,7 @@ package net.zhenglai.lib
 
 import cats.kernel.Monoid
 
-package object fun {
+package object other {
 
   implicit def monoidTuple[A: Monoid, B: Monoid]: Monoid[(A, B)] =
     new Monoid[(A, B)] {
