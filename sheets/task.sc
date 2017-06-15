@@ -32,7 +32,7 @@ explicitly, as you’ll see.
 
 // TODO: vs ScalaZ Task  https://monix.io/docs/2x/eval/task.html#introduction 
 
-import scala.concurrent.{ Await, Future }
+import scala.concurrent.{ Await, ExecutionContext, Future }
 import scala.util.{ Failure, Success }
 import scala.concurrent.duration._
 
@@ -136,6 +136,9 @@ tf.runAsync.foreach(println)
 /*
 fromFuture takes a strict argument and that may not be what you want. You might want a factory of Future. The design of Task however is
 to have fine-grained control over the evaluation model, so in case you want a factory, you need to combine it with Task.defer
+
+A Future reference is like a strict value, meaning that when you receive one, whatever process that’s supposed to complete it has
+probably started already.
  */
 val tg = Task.defer {
   Task.fromFuture(Future {println("Effect"); "fromFuture"})
@@ -145,3 +148,33 @@ tg.runAsync.foreach(println)
 tg.runAsync.foreach(println)
 tg.runAsync.foreach(println)
 tg.runAsync.foreach(println)
+
+val th = Task.deferFuture {
+  Future {println("Effect"); "deferFuture"}
+}
+th.runAsync.foreach(println)
+th.runAsync.foreach(println)
+th.runAsync.foreach(println)
+th.runAsync.foreach(println)
+
+
+// TODO: fix it!
+/*
+Task takes a Scheduler (inheriting from ExecutionContext) only when runAsync gets called, but we don’t need it just for building a Task
+reference.
+ */
+//def sumFuture(list: Seq[Int])(implicit ec: ExecutionContext): Future[Int] = Future(list.sum)
+//
+//def sumTask(list: Seq[Int]): Task[Int] = Task.deferFutureAction { implicit scheduler =>
+//  sumFuture(list)
+//}
+//// No more implicit ExecutionContext passed around
+//
+//sumTask(List(1, 2, 3))
+//  .map(2 *)
+//  .foreach(println)
+
+/*
+Task.fork ensures an asynchronous boundary, forcing the fork of a (logical) thread on execution.
+By default the execution model prefers to execute things on the current thread, at first
+ */
