@@ -1,7 +1,7 @@
-import java.util.concurrent.{ Executors, ThreadFactory, TimeUnit }
+import java.util.concurrent.{ Executors, ThreadFactory }
 
 import scala.concurrent.duration.Duration
-import scala.concurrent.{ Await, ExecutionContext, Future, Promise, blocking }
+import scala.concurrent._
 import scala.util.control.NonFatal
 
 import monix.execution.Scheduler
@@ -63,6 +63,9 @@ private val io = Executors.newCachedThreadPool(
  have enough threads that you can block. But if unbounded is too much, depending on use-case, you can later fine-tune it, the idea with
  this sample being that you get the ball rolling.
 You could also use Monix’s Scheduler.io of course, which is also backed by a “cached thread-pool”:
+
+
+blocking acts as a hint to the ExecutionContext that it contains blocking code, so that it may spawn a new thread to prevent deadlocks. This presumes the ExecutionContext can do that, but not all are made to.
  */
 // TODO: c as /**/
 
