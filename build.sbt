@@ -25,6 +25,7 @@ val common = List(
   , "com.softwaremill.macwire" %% "util" % "2.3.0"
   , "com.softwaremill.macwire" %% "proxy" % "2.3.0"
   , "io.monix" %% "monix" % "2.3.0"
+  ,"org.scala-lang.modules" %% "scala-async" % "0.9.6"
 )
 
 initialCommands in console := "import scalaz._, Scalaz._"
